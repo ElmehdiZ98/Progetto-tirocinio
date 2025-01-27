@@ -1,0 +1,24 @@
+quarkus:
+  http:
+    port: 8085
+    test-port: 8085
+
+  datasource:
+    db-kind: postgresql
+    username: postgres
+    password: .Napoli121
+    jdbc:
+      url: jdbc:postgresql://localhost:5435/mosem
+      max-size: 8
+      min-size: 2
+
+  hibernate-orm:
+    database:
+      generation: update
+    log:
+      sql: true
+    sql-load-script: import.sql
+    envers:
+      enabled: true
+  arc:
+    default-bean-validation: true
