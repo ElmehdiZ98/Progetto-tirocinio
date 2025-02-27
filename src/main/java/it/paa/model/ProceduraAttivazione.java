@@ -2,6 +2,7 @@ package it.paa.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import it.paa.dto.AvvisiBandiDTO;
 import jakarta.persistence.*;
@@ -17,6 +18,7 @@ import org.hibernate.type.YesNoConverter;
 import org.hibernate.validator.constraints.Length;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,7 +34,6 @@ import java.util.stream.Collectors;
 @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 @AuditTable("history_procedura_attivazione")
 public class ProceduraAttivazione extends PanacheEntity {
-
 
     @Column(name = "aiuto", length = 1)
     @Convert(converter = YesNoConverter.class)
@@ -60,8 +61,6 @@ public class ProceduraAttivazione extends PanacheEntity {
     public String codiceProceduraAttivazione;     //Codice IGRUE
 
     @Column(name = "descrizione")
-    @Length(max = 255)
-    @NotNull
     public String descrizione;                //Codice PRATT/denominazione procedura
 
     @ManyToOne
@@ -76,6 +75,7 @@ public class ProceduraAttivazione extends PanacheEntity {
     @JoinColumn(name = "current_state")
     public StepWorkflow currentState;       //Stato
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "art_proc_att",
@@ -100,6 +100,10 @@ public class ProceduraAttivazione extends PanacheEntity {
     }
 
 
+    public Progetto getProgettoAttivazione() {
+        return Progetto.find("proceduraAttivazione", this).firstResult();
+    }
 
+    
 }
 

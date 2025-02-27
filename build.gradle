@@ -9,7 +9,8 @@ repositories {
 }
 
 dependencies {
-//Lombok
+    implementation 'io.quarkus:quarkus-keycloak-authorization'
+    implementation 'io.quarkus:quarkus-oidc'
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
@@ -27,8 +28,6 @@ dependencies {
     implementation "io.quarkus:quarkus-hibernate-envers"
     implementation 'io.quarkus:quarkus-hibernate-validator'
 
-//    implementation 'io.quarkus:quarkus-oidc'
-//    implementation 'io.quarkus:quarkus-keycloak-authorization'
 
 }
 

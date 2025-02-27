@@ -15,6 +15,12 @@ import java.io.Serializable;
 @NamedQuery(name = "TipoNaturaCup.findAll", query = "SELECT t FROM TipoNaturaCup t")
 public class TipoNaturaCup extends PanacheEntity implements Serializable {
 
+    @Column(name = "codice")
+    public String codice;
+
+    @Column(name = "descrizione")
+    public String descrizione;
+
     @Column(name = "has_aiuto")
     @Convert(converter = YesNoConverter.class)
     public Boolean hasAiuto = Boolean.FALSE;

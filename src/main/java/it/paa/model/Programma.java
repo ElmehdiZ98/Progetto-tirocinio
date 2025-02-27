@@ -16,10 +16,10 @@ import org.hibernate.envers.RelationTargetAuditMode;
 @Setter
 @Entity
 @Table(name = "programma")
-@NamedQuery(name = "Programma.findAll", query = "SELECT p FROM Program p ")
+@NamedQuery(name = "Programma.findAll", query = "SELECT p FROM Programma p ")
 @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 @AuditTable(value = "history_programma")
-public class Program extends Articolazione {
+public class Programma extends Articolazione {
 
 
     @ManyToOne

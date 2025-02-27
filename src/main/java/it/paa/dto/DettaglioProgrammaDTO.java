@@ -1,5 +1,6 @@
 package it.paa.dto;
 
+import it.paa.model.Articolazione;
 import it.paa.model.Atto;
 import it.paa.model.TipoAtto;
 import it.paa.model.TipoProgramma;
@@ -12,6 +13,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class DettaglioProgrammaDTO {
+
     public String codice;
 
     public String descrizione;
@@ -33,5 +35,7 @@ public class DettaglioProgrammaDTO {
     public BigDecimal dotazioneFinanziaria;
 
     public BigDecimal dotazioneFinanziariaTotale;
+
+    public Articolazione articolazione;
 
 }

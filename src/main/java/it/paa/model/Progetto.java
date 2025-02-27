@@ -1,6 +1,10 @@
 package it.paa.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import it.paa.dto.AvvisiBandiDTO;
+import it.paa.dto.DettaglioProgettoDTO;
+import it.paa.dto.ProgettoDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -13,7 +17,9 @@ import org.hibernate.envers.Audited;
 import org.hibernate.envers.RelationTargetAuditMode;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Entity
@@ -52,6 +58,7 @@ public class Progetto extends PanacheEntity {
     public String codiceProceduraAttivazioneOriginaria;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "procedura_attivazione_id")
     public ProceduraAttivazione proceduraAttivazione;
 
@@ -69,6 +76,9 @@ public class Progetto extends PanacheEntity {
     @JoinColumn(name = "current_state")
     public StepWorkflow currentState;
 
+    @OneToMany(mappedBy = "progetto")
+    public List<ProgettoProgramma> progettoProgrammaList = new ArrayList<>();
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "localizzazione_progetto",
@@ -76,4 +86,12 @@ public class Progetto extends PanacheEntity {
             inverseJoinColumns = @JoinColumn(name = "localizzazione_id")
     )
     public List<Localizzazione> localizzazione;
+
+
+    @Transient
+    public boolean isPropostaProgetto() {
+        return currentState.getMarker() != null && currentState.getMarker()
+                .equals("PROPOSTA_PROGETTUALE");
+    }
+
 }

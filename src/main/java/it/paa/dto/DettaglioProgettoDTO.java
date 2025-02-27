@@ -1,5 +1,7 @@
 package it.paa.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import it.paa.model.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,21 +12,22 @@ import java.util.List;
 
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class DettaglioProgettoDTO {
 
-    public String titolo;         //titolo
+    public String titolo;
 
-    public String sintesiProgetto;   //sintesi
+    public String sintesiProgetto;
 
-    public Date startDatetime;              //Data di avvio
+    public Date startDatetime;
 
-    public ProceduraAttivazione procedura;
+    public String cupDefinitivo;
 
-    public String cupDefinitivo;         //CUP defenitivo
+    public TipoNaturaCup tipoNaturaCup;
 
-    public TipoNaturaCup tipoNaturaCup;  //Tipo Natura CUP
+    public TipoCup tipoCup;
 
-    public String codiceProceduraAttivazione;     //Codice IGRUE
+    public String codiceProceduraAttivazione;
 
     public AttoProceduraAttivazione atto;
 
@@ -32,35 +35,29 @@ public class DettaglioProgettoDTO {
 
     public BigDecimal importoTotale;
 
-    public Regione regione;
-
-    public Provincia provincia;
-
-    public Comune comune;
-
-    public String denominazione;
-
-    public TipoSoggettoDiritto tipoSoggettoDiritto;
-
-    public String cfPiva;
-
-    public String codiceIPA;         //codiceIPA
-
-    public TipoFormaGiuridica tipoFormaGiuridica;        //Tipo forma giudiziaria
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    public List<Localizzazione> localizzazioneList;
 
     public TipoCodiceAteco tipoCodiceAteco;
 
-    public Articolazione articolazione;           //articolazione
+    public String codice;
 
-    public List<TipoCampoIntervento> tipoCampoInterventoList;   //campo di intervento
+   // public Articolazione articolazione;
 
-    public List<TipoFormeFinanziamento> tipoFormeFinanziamentoList;    //forme finanziamento
+    public String descrizione;
 
-    public List<TipoDimensioneTematicaSecondaria> tipoDimensioneTematicaSecondariaList;   // dimensione tematica secondaria
+    public ProgettoProgramma progettoProgramma;
 
-    public List<TipoRisultatoAtteso> tipoRisultatoAttesoList;   //risultato atteso
+    public TipoCampoIntervento tipoCampoInterventoList;   //campo di intervento
 
-    public String nome;   // nome
+    public TipoFormeFinanziamento tipoFormeFinanziamentoList;    //forme finanziamento
 
-    public String cognome;  //cognome
+    public TipoDimensioneTematicaSecondaria tipoDimensioneTematicaSecondariaList;   // dimensione tematica secondaria
+
+    public TipoRisultatoAtteso tipoRisultatoAttesoList;   //risultato atteso
+
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    public List<SoggettoDTO> soggetti;
+
+
 }

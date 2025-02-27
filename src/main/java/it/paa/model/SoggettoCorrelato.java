@@ -25,7 +25,5 @@ public class SoggettoCorrelato extends PanacheEntity {
     public Anagrafica anagrafica;
 
 
-
-
 }
 

@@ -36,8 +36,8 @@ public class Regione extends PanacheEntity {
     @Column(name = "denominazione")
     public String denominazione;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "regione")
-    public List<Provincia> province = new ArrayList<>();
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "regione")
+//    public List<Provincia> province = new ArrayList<>();
 
 
 

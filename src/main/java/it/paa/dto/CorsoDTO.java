@@ -1,6 +1,7 @@
 package it.paa.dto;
 
 
+import it.paa.model.MacroCategoriaModalitaFormativa;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,7 +9,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class CourseDTO {
+public class CorsoDTO {
 
     public String codiceCorso;
 

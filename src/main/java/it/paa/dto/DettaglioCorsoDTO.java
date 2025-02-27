@@ -50,19 +50,5 @@ public class DettaglioCorsoDTO {
 
 
 
-    @Setter
-    @Getter
-    public static class ModuloDTO {
-        public String titoloModulo;
 
-        public BigDecimal numeroOre;
-
-        public Date dataInizioModulo;
-
-        public Date dataFineModulo;
-
-        public List<TipoMetodologia> metodologie;
-
-
-    }
 }

@@ -1,5 +1,6 @@
 package it.paa.api;
 
+import io.quarkus.security.Authenticated;
 import it.paa.ExceptionProjectConstant;
 import it.paa.model.SoggettoCorrelato;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -21,7 +22,7 @@ import java.util.Map;
 import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
 
 
-@Path("/projects")
+@Path("/beneficiary")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @ApplicationScoped
@@ -32,8 +33,7 @@ public class BeneficiarioResource {
      * Verifica se un beneficiario è associato a uno o più progetti
      */
     @GET
-    @Path("/api/beneficiario/verify")
-    @Transactional
+    @Path("/check-projects")
     @Operation(summary = "Verifica se il beneficiario è associato ad almeno un progetto")
     @APIResponse(responseCode = "200", description = "Il beneficiario è associato ad almeno un progetto",
             content = @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = URI.class)))
@@ -46,7 +46,7 @@ public class BeneficiarioResource {
                     .build();
         }
 
-        // Trova il beneficiario (Anagrafica) dal CF/P.IVA
+        // Trova il beneficiario (Anagrafica) a partir dal CF/P.IVA
         Anagrafica beneficiario = Anagrafica.find("cfPiva = ?1", cfPiva).firstResult();
 
         if (beneficiario == null) {
@@ -72,4 +72,7 @@ public class BeneficiarioResource {
                     .build();
         }
     }
+
+
+
 }

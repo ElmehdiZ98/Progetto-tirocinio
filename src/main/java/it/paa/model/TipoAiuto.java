@@ -16,9 +16,12 @@ import lombok.Setter;
 public class TipoAiuto extends PanacheEntity {
 
     @Column(name = "codice")
-    private String codice;
+    public String codice;
+
+    @Column(name = "descrizione")
+    public String descrizione;
 
     @Column(name = "codice_2007_2013")
-    private String codice20072013;
+    public String codice20072013;
 
 }

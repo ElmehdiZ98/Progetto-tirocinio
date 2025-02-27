@@ -32,9 +32,9 @@ public class Comune extends PanacheEntity {
     @Size(max = 255)
     public String denominazione;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "provincia")
-    public Provincia provincia;
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "provincia")
+//    public Provincia provincia;
 
     @Column(name = "nuts_one")
     @Size(max = 255)

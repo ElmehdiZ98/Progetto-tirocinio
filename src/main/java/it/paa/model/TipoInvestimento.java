@@ -15,6 +15,8 @@ public class TipoInvestimento extends PanacheEntity {
     @Column(name = "codice")
     public String codice;
 
+    @Column(name = "descrizione")
+    public String descrizione;
     @ManyToOne
     @JoinColumn(name = "tipo_natura_cup_id")
     public TipoNaturaCup tipoNaturaCup;

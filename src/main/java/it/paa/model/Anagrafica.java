@@ -7,24 +7,37 @@ import jakarta.validation.constraints.*;
 import jakarta.persistence.*;
 
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Setter;
 import lombok.Getter;
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
 import org.hibernate.type.YesNoConverter;
 import java.util.Date;
 
 @Entity
 @Getter
 @Setter
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @Table(name = "anagrafica")
+@NamedQuery(name = "Anagrafica.findAll", query = "SELECT a FROM Anagrafica a")
+@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+@AuditTable(value = "history_anagrafica")
 public class Anagrafica extends PanacheEntity {
 
     @Size(max = 50)
     @Pattern(regexp = "[a-zA-Zàèìòù' \t\r\n\f]+\\.?", message = "Formato Nome non valido")
-    public String nome;
+    @Column(name = "nome")
+    public String nome;          //nome
 
     @Size(max = 50)
     @Pattern(regexp = "[a-zA-Zàèìòù' \t\r\n\f]+\\.?", message = "Formato Cognome non valido")
-    public String cognome;
+    @Column(name = "cognome")
+    public String cognome;        //cognome
 
 
     @Column(name = "email", unique = true)
@@ -84,10 +97,6 @@ public class Anagrafica extends PanacheEntity {
     @JoinColumn(name = "tipo_codice_ateco_id")
     public TipoCodiceAteco tipoCodiceAteco;
 
-//    @ManyToOne
-//    @JoinColumn(name = "tipo_genere")
-//    public TipoGenere tipoGenere;
-//
     @ManyToOne
     @JoinColumn(name = "tipo_soggetto_diritto")
     @NotNull
@@ -97,10 +106,6 @@ public class Anagrafica extends PanacheEntity {
     @Column(name = "codice_IPA")
     @Size(max = 255)
     private String codiceIPA;         //codiceIPA
-//
-//    @ManyToOne
-//    @JoinColumn(name = "tipo_dimensione_impresa_id")
-//    public TipoDimensioneImpresa tipoDimensioneImpresa;
 
 
     @Column(name = "nome_rappr_legale")
@@ -116,16 +121,6 @@ public class Anagrafica extends PanacheEntity {
     @Column(name = "email_rappr_legale")
     public String emailRappresentanteLegale;
 
-
-//    @ManyToOne
-//    @JoinColumn(name = "luogo_nascita_rappr_legale")
-//    public Comune luogoNascitaRappresentanteLegale;
-
-//    @Column(name = "codice_fiscale_rappr_legale")
-//    @Size(min = 16, max = 16)
-//    @CodiceFiscale
-//    public String codiceFiscaleRappresentanteLegale;
-
     @Temporal(TemporalType.DATE)
     @Column(name = "data_nascita_rappr_legale")
     @Past
@@ -140,17 +135,6 @@ public class Anagrafica extends PanacheEntity {
     @Convert(converter = YesNoConverter.class)
     public boolean isCfEstero = false;
 
-//    @ManyToOne
-//    @JoinColumn(name = "tipo_cittadinanza_id")
-//    public TipoCittadinanza tipoCittadinanza;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "documento_riconoscimento")
-//    public AlfrescoDocument documentoRiconoscimento;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "documento_pdf_firmato")
-//    public AlfrescoDocument documentoPdfFirmato;
 
     @Column(name = "privacy_policy", length = 1)
     @Convert(converter = YesNoConverter.class)
@@ -171,10 +155,6 @@ public class Anagrafica extends PanacheEntity {
 
     @Column(name = "documento_data_validita")
     public Date documentoDataValidita;
-
-//    @ManyToOne
-//    @JoinColumn(name = "tipo_documento_identita_id")
-//    public TipoDocumentoIdentita tipoDocumentoIdentita;
 
     public boolean isCfEstero() {
         return isCfEstero;

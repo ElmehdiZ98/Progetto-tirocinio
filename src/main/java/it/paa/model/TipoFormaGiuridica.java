@@ -16,15 +16,15 @@ import lombok.Setter;
 public class TipoFormaGiuridica extends PanacheEntity {
 
     @Column(name = "codice")
-    private String codice;
+    public String codice;
 
     @Column(name = "divisione")
-    private String divisione;
+    public String divisione;
 
     @Column(name = "sezione")
-    private String sezione;
+    public String sezione;
 
     @Column(name = "descrizione")
-    private String descrizione;
+    public String descrizione;
 
 }

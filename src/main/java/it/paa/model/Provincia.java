@@ -35,12 +35,12 @@ public class Provincia extends PanacheEntity {
     @Column(name = "denominazione")
     public String denominazione;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "regione")
     public Regione regione;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "provincia")
-    public List<Comune> comuni = new ArrayList<>();
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "provincia")
+//    public List<Comune> comuni = new ArrayList<>();
 
 
 

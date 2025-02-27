@@ -14,6 +14,9 @@ import lombok.Setter;
 @NamedQuery(name = "TipoCampoIntervento.findAll", query = "SELECT t FROM TipoCampoIntervento t")
 public class TipoCampoIntervento extends TipoClassificazione {
 
+    @Column(name = "codice")
+    public String codice;
+
     @Column(name = "descrizione")
     public String descrizione;
 

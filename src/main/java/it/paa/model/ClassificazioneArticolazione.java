@@ -25,7 +25,7 @@ public class ClassificazioneArticolazione extends PanacheEntity {
     @JoinTable(name = "class_campo_intervento_art", joinColumns = {
             @JoinColumn(name = "class_art_id", nullable = false)}, inverseJoinColumns = {
             @JoinColumn(name = "tipo_campo_intervento_id", nullable = false)})
-    public List<TipoCampoIntervento> tipoCampoInterventoList = new ArrayList<>();     //camo di intervento
+    public List<TipoCampoIntervento> tipoCampoInterventoList = new ArrayList<>();     //campo di intervento
 
     @ManyToMany
     @JoinTable(name = "class_forme_finanziamento_art", joinColumns = {
@@ -45,6 +45,10 @@ public class ClassificazioneArticolazione extends PanacheEntity {
             @JoinColumn(name = "class_art_id", nullable = false)}, inverseJoinColumns = {
             @JoinColumn(name = "tipo_risultato_atteso_id", nullable = false)})
     public List<TipoRisultatoAtteso> tipoRisultatoAttesoList = new ArrayList<>();                //risultato atteso
+
+
+
+
 
 
 }

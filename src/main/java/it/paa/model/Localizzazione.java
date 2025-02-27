@@ -19,15 +19,16 @@ import org.hibernate.envers.RelationTargetAuditMode;
 @AuditTable(value = "history_localizzazione")
 public class Localizzazione extends PanacheEntity {
 
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "regione")
     public Regione regione;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "provincia")
     public Provincia provincia;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "comune")
     public Comune comune;
 }

@@ -2,7 +2,7 @@ package it.paa.model;
 
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import it.paa.dto.CourseDTO;
+import it.paa.dto.CorsoDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -21,11 +21,16 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "corso")
-@NamedQuery(name="Course.findAll",query = "SELECT c FROM Course c")
+@NamedQuery(name="Corso.findAll",query = "SELECT c FROM Corso c")
 @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 @AuditTable(value = "history_corso")
-public class Course extends PanacheEntity {
+public class Corso extends PanacheEntity {
 
+   // aggiunta progetto
+    @ManyToOne
+    @JoinColumn(name = "progetto_id", nullable = false)
+    @NotNull(message = "Il progetto è obbligatorio")
+    public Progetto progetto;
 
     @NotNull
     @Column(name = "codice_corso")
@@ -104,16 +109,16 @@ public class Course extends PanacheEntity {
 
 
 
-    public static CourseDTO toDTO(Course course) {
-        CourseDTO dto = new CourseDTO();
-        dto.codiceCorso = course.getCodiceCorso();
-        dto.titoloCorso = course.getTitoloCorso();
-        dto.macroCategoriaModalitaFormativa = String.valueOf(course.getTipoModalitaFormativa()
+    public static CorsoDTO toDTO(Corso Corso) {
+        CorsoDTO dto = new CorsoDTO();
+        dto.codiceCorso = Corso.getCodiceCorso();
+        dto.titoloCorso = Corso.getTitoloCorso();
+        dto.macroCategoriaModalitaFormativa = String.valueOf(Corso.getTipoModalitaFormativa()
                 .getClasseModalitaFormativa()
                 .getMacroCategoriaModalitaFormativa());
-        dto.dataInizio = course.getDataInizio();
-        dto.dataFine = course.getDataFine();
-        dto.durata = course.getDurata();
+        dto.dataInizio = Corso.getDataInizio();
+        dto.dataFine = Corso.getDataFine();
+        dto.durata = Corso.getDurata();
 
         return dto;
     }

@@ -25,9 +25,9 @@ public class Modulo extends PanacheEntity {
 
 
     @ManyToOne
-    @JoinColumn(name = "corso_id", nullable = false)
-    @NotNull(message = "Il corso è obbligatorio")
-    public Course corso;
+    @JoinColumn(name = "corso_id", nullable = false)  // Nome della colonna in DB rimane invariato
+    @NotNull(message = "Il Corso è obbligatorio")
+    public Corso corso;  // Modifica qui: usa "corso" con la lettera minuscola
 
     @NotNull
     @Column(name = "titolo")

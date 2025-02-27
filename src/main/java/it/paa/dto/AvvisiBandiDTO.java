@@ -3,9 +3,13 @@ package it.paa.dto;
 
 import it.paa.model.StepWorkflow;
 import it.paa.model.TipoProceduraAttivazione;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
+@Getter
+@Setter
 public class AvvisiBandiDTO {
 
     public String codiceProceduraAttivazione;
@@ -23,6 +27,8 @@ public class AvvisiBandiDTO {
     public String denominazione;
 
     public String topLevel;
+
+
 
     public AvvisiBandiDTO(String codiceProceduraAttivazione, String descrizione, TipoProceduraAttivazione tipoProceduraAttivazione,
                           BigDecimal importoTotale, StepWorkflow currentState, String codice,

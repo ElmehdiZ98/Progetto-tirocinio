@@ -1,9 +1,8 @@
 package it.paa.model;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import it.paa.ExceptionProjectConstant;
+import io.quarkus.security.Authenticated;
 import it.paa.dto.ListaArticolazioneDTO;
-import it.paa.exception.EntityException;
 import it.paa.interfaces.NestedSetsTreeNode;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
@@ -11,17 +10,14 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Type;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.hibernate.envers.RelationTargetAuditMode;
-import org.hibernate.query.sqm.EntityTypeException;
-import org.hibernate.validator.constraints.Length;
 
 import javax.swing.tree.TreeNode;
 import java.math.BigDecimal;
 import java.util.Enumeration;
-import java.util.List;
 
 
 @Entity
@@ -58,11 +54,15 @@ public class Articolazione extends PanacheEntity implements NestedSetsTreeNode {
     @JoinColumn(name = "top_level")
     public NestedSetsTreeNode topLevel;       //Denominazione programma
 
+    @OneToOne(cascade = CascadeType.REMOVE,
+            orphanRemoval = true, mappedBy = "articolazione")
+    @NotAudited
+    public ClassificazioneArticolazione classificazioneArticolazione;
 
 
     @Transient
-    public Program getProgramma() {
-        return (Program) topLevel;
+    public Programma getProgramma() {
+        return (Programma) topLevel;
     }
 
     @Transient
@@ -118,15 +118,15 @@ public class Articolazione extends PanacheEntity implements NestedSetsTreeNode {
     }
 
 
-
-    public static ListaArticolazioneDTO getProgrammaDetails(Long articolazioneId)  {
-        Articolazione articolazione = Articolazione.findById(articolazioneId);
+    //@Authenticated
+    public static ListaArticolazioneDTO getProgrammaDetails(String codice)  {
+        Articolazione articolazione = Articolazione.find("codice", codice).firstResult();
 
         if (articolazione == null) {
-            throw new EntityNotFoundException("Articolazione con ID " + articolazioneId + " non trovata.");
+            throw new EntityNotFoundException("Articolazione con ID " + codice + " non trovata.");
         }
-        if (!(articolazione instanceof Program programma)) {
-            throw new IllegalArgumentException("L'Articolazione con ID " + articolazioneId + " non è un Programma.");
+        if (!(articolazione instanceof Programma programma)) {
+            throw new IllegalArgumentException("L'Articolazione con ID " + codice + " non è un Programma.");
         }
 
         ListaArticolazioneDTO dto = new ListaArticolazioneDTO();

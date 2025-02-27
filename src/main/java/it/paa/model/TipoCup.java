@@ -18,6 +18,9 @@ public class TipoCup extends PanacheEntity implements Serializable {
     @Column(name = "codice")
     public String codice;
 
+    @Column(name = "descrizione")
+    public String descrizione;
+
     @Column(name = "deprecated")
     @Convert(converter = YesNoConverter.class)
     public Boolean deprecated = false;
