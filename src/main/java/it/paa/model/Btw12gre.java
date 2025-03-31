@@ -1,6 +1,7 @@
 package it.paa.model;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
