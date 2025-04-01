@@ -40,4 +40,5 @@ public class Btw12gre extends PanacheEntity {
     public UUID btw12gre5;
     public UUID btw12gre6;
     public UUID btw12gre7;
+
 }
