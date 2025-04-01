@@ -27,6 +27,8 @@ dependencies {
     implementation 'jakarta.json.bind:jakarta.json.bind-api:2.0.0'
     implementation "io.quarkus:quarkus-hibernate-envers"
     implementation 'io.quarkus:quarkus-hibernate-validator'
+    implementation 'io.quarkus:quarkus-liquibase-mongodb'
+    implementation 'io.quarkus:quarkus-mongodb-panache'
 
 
 }
